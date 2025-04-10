@@ -1,6 +1,6 @@
 name: latex-build-and-release
 description: Builds a PDF file from LaTeX source and publishes it as asset in a release.
-author: TemplatesHub
+author: TemplatesHub & XSmeets
 branding: 
   icon: 'file-text'
   color: 'green'
@@ -23,18 +23,21 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: "Updating packages"
-      shell: bash
-      run: sudo apt-get update
-    - name: "Install texlive"
-      shell: bash
-      run: sudo apt-get -y install texlive-full
     - name: "First build PDF file"
-      shell: bash
-      run: pdflatex ${{ inputs.tex-entry-point }}.tex
+      uses: docker://ghcr.io/smeetsee/latex-docker:master
+      with:
+        entrypoint: ''
+      run: pdflatex -shell-escape -interaction=nonstopmode -halt-on-error ${{ inputs.tex-entry-point }}.tex
     - name: "Second build PDF file for TOC and Images"
-      shell: bash
-      run: pdflatex ${{ inputs.tex-entry-point }}.tex
+      uses: docker://ghcr.io/smeetsee/latex-docker:master
+      with:
+        entrypoint: ''
+      run: pdflatex -shell-escape -interaction=nonstopmode -halt-on-error ${{ inputs.tex-entry-point }}.tex
+    - name: "Third build PDF file for fixing references"
+      uses: docker://ghcr.io/smeetsee/latex-docker:master
+      with:
+        entrypoint: ''
+      run: pdflatex -shell-escape -interaction=nonstopmode -halt-on-error ${{ inputs.tex-entry-point }}.tex
     - name: "Rename PDF file"
       shell: bash
       run: mv ${{ inputs.tex-entry-point }}.pdf "${{ inputs.pdf-name }}-${{ github.ref_name }}.pdf"
