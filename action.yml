@@ -24,15 +24,15 @@ runs:
   using: 'composite'
   steps:
     - name: "First build PDF file"
-      uses: ./latex-docker-action
+      uses: smeetsee/gh-action-latex-build@v1
       with:
         tex-file: ${{ inputs.tex-entry-point }}.tex
     - name: "Second build PDF file for TOC and Images"
-      uses: ./latex-docker-action
+      uses: smeetsee/gh-action-latex-build@v1
       with:
         tex-file: ${{ inputs.tex-entry-point }}.tex
     - name: "Third build PDF file for fixing references"
-      uses: ./latex-docker-action
+      uses: smeetsee/gh-action-latex-build@v1
       with:
         tex-file: ${{ inputs.tex-entry-point }}.tex
     - name: "Rename PDF file"
