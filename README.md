@@ -4,9 +4,11 @@
 This actions compiles a PDF document starting from LaTeX source code and attaches the PDF document as asset in a release.
 
 ## Table of contents
-- [Usage example](#usage-example)
-- [Optional inputs](#optional-inputs)
-- [Final PDF result](#final-pdf-result)
+- [LaTeX build and release](#latex-build-and-release)
+  - [Table of contents](#table-of-contents)
+  - [Usage example](#usage-example)
+  - [Optional inputs](#optional-inputs)
+  - [Final PDF result](#final-pdf-result)
 
 ## Usage example
 This example is executed every time a new release is created, resulting in the compilation of PDF document, starting from the repository's LaTeX source code, which is then uploaded as asset in said release.
@@ -22,7 +24,7 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Build and release LaTeX document
-        uses: TemplatesHub/gh-action-latex-build-and-release@v2
+        uses: smeetsee/gh-action-latex-build-and-release@v3
         with:
           tex-entry-point: 'main'
           pdf-name: 'My_pdf_document'
