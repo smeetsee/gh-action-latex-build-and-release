@@ -26,15 +26,15 @@ runs:
     - name: "First build PDF file"
       uses: smeetsee/gh-action-latex-build@v1
       with:
-        tex-file: ${{ inputs.tex-entry-point }}.tex
+        tex_file: ${{ inputs.tex-entry-point }}.tex
     - name: "Second build PDF file for TOC and Images"
       uses: smeetsee/gh-action-latex-build@v1
       with:
-        tex-file: ${{ inputs.tex-entry-point }}.tex
+        tex_file: ${{ inputs.tex-entry-point }}.tex
     - name: "Third build PDF file for fixing references"
       uses: smeetsee/gh-action-latex-build@v1
       with:
-        tex-file: ${{ inputs.tex-entry-point }}.tex
+        tex_file: ${{ inputs.tex-entry-point }}.tex
     - name: "Rename PDF file"
       shell: bash
       run: mv ${{ inputs.tex-entry-point }}.pdf "${{ inputs.pdf-name }}-${{ github.ref_name }}.pdf"
