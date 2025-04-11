@@ -23,18 +23,30 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Debug
+      shell: bash
+      run: ls -la
     - name: "First build PDF file"
       uses: smeetsee/gh-action-latex-build@v1
       with:
         tex-file: ${{ inputs.tex-entry-point }}.tex
+    - name: Debug
+      shell: bash
+      run: ls -la
     - name: "Second build PDF file for TOC and Images"
       uses: smeetsee/gh-action-latex-build@v1
       with:
         tex-file: ${{ inputs.tex-entry-point }}.tex
+    - name: Debug
+      shell: bash
+      run: ls -la
     - name: "Third build PDF file for fixing references"
       uses: smeetsee/gh-action-latex-build@v1
       with:
         tex-file: ${{ inputs.tex-entry-point }}.tex
+    - name: Debug
+      shell: bash
+      run: ls -la
     - name: "Rename PDF file"
       shell: bash
       run: mv ${{ inputs.tex-entry-point }}.pdf "${{ inputs.pdf-name }}-${{ github.ref_name }}.pdf"
